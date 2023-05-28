@@ -1,0 +1,38 @@
+import mongoose, { Schema, Document } from "mongoose";
+
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  playlists: any[];
+  isAdmin: boolean;
+}
+
+const userSchema: Schema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    playlists: {
+      type: Array,
+      required: false,
+    },
+    isAdmin: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model<IUser>("user", userSchema);
